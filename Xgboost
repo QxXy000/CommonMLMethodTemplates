@@ -1,0 +1,23 @@
+ params = {
+                'boosting_type': 'gbdt',
+                'objective': 'multiclass',
+                'num_class': 4,
+                'num_leaves': 2 ** 5,
+                'feature_fraction': 0.8,
+                'bagging_fraction': 0.8,
+                'bagging_freq': 4,
+                'learning_rate': 0.1,
+                'seed': seed,
+                'nthread': 28,
+                'n_jobs':24,
+                'verbose': -1,
+            }
+
+            model = clf.train(params, 
+                      train_set=train_matrix, 
+                      valid_sets=valid_matrix, 
+                      num_boost_round=2000, 
+                      verbose_eval=100, 
+                      early_stopping_rounds=200)
+            val_pred = model.predict(val_x, num_iteration=model.best_iteration)
+            test_pred = model.predict(test_x, num_iteration=model.best_iteration) 
